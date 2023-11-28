@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace IBroStudio\PolymorphicTeam\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class PolymorphicTeamCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'polymorphic-team';
 
     public $description = 'My command';
 
