@@ -2,9 +2,9 @@
 
 namespace IBroStudio\PolymorphicTeam\Tests;
 
+use IBroStudio\PolymorphicTeam\PolymorphicTeamServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use IBroStudio\PolymorphicTeam\PolymorphicTeamServiceProvider;
 
 class TestCase extends Orchestra
 {
