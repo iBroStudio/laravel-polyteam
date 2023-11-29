@@ -14,17 +14,17 @@ class ModelGenerator extends GeneratorCommand
 
     protected function getStub()
     {
-        return __DIR__ . '/stubs/polyteamModel.stub';
+        return __DIR__.'/stubs/polyteamModel.stub';
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Models\Teams';
+        return $rootNamespace.'\Models\Teams';
     }
 
     protected function replaceClass($stub, $name)
     {
-        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
+        $class = str_replace($this->getNamespace($name).'\\', '', $name);
 
         return str_replace('{{model}}', $class, $stub);
     }

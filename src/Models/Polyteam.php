@@ -14,7 +14,7 @@ class Polyteam extends TeamworkTeam
 
     protected $fillable = ['name', 'owner_id', 'slug', 'type'];
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')

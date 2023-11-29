@@ -15,12 +15,12 @@ class UserTraitGenerator extends GeneratorCommand
 
     protected function getStub()
     {
-        return __DIR__ . '/stubs/userTrait.stub';
+        return __DIR__.'/stubs/userTrait.stub';
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Models\Teams\Traits';
+        return $rootNamespace.'\Models\Teams\Traits';
     }
 
     protected function replaceClass($stub, $name)

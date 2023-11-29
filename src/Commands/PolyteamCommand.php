@@ -17,7 +17,7 @@ class PolyteamCommand extends Command
 
         $this->call(ModelGenerator::class, ['name' => $model]);
 
-        $this->call(UserTraitGenerator::class, ['name' => 'UserHas' . Str::plural($model)]);
+        $this->call(UserTraitGenerator::class, ['name' => 'UserHas'.Str::plural($model)]);
 
         $this->comment('All done');
 

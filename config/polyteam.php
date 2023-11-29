@@ -11,7 +11,7 @@ return [
     'models' => [
         'invite' => Mpociot\Teamwork\TeamInvite::class,
         'polyteam' => \IBroStudio\Polyteam\Models\Polyteam::class,
-        'user' => config('auth.providers.users.model',\App\User::class),
+        'user' => config('auth.providers.users.model', \App\User::class),
     ],
 
     'user_foreign_key' => 'id',

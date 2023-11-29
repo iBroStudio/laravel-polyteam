@@ -2,7 +2,6 @@
 
 namespace IBroStudio\Polyteam\Models\Traits;
 
-use App\Models\Teams\Studio;
 use IBroStudio\Polyteam\Models\Polyteam;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,8 +13,10 @@ use Mpociot\Teamwork\Exceptions\UserNotInTeamException;
 
 trait UserHasPolyteams
 {
-    abstract protected function getCurrentPolyteamId(): int|null;
-    abstract protected function setCurrentPolyteamId(int|null $polyteam_id): void;
+    abstract protected function getCurrentPolyteamId(): ?int;
+
+    abstract protected function setCurrentPolyteamId(?int $polyteam_id): void;
+
     abstract protected function polyteams(): BelongsToMany;
 
     public function invites(): HasMany
@@ -104,12 +105,12 @@ trait UserHasPolyteams
         if ($polyteam !== 0 && $polyteam !== null) {
             $polyteam = $this->retrievePolyteamId($polyteam);
             $polyteamObject = (new Polyteam)->find($polyteam);
-            if (!$polyteamObject) {
+            if (! $polyteamObject) {
                 $exception = new ModelNotFoundException();
                 $exception->setModel(Polyteam::class);
                 throw $exception;
             }
-            if (!$polyteamObject->users->contains($this->getKey())) {
+            if (! $polyteamObject->users->contains($this->getKey())) {
                 $exception = new UserNotInTeamException();
                 $exception->setTeam($polyteamObject->name);
                 throw $exception;
@@ -152,5 +153,4 @@ trait UserHasPolyteams
 
         return $polyteam;
     }
-
 }
