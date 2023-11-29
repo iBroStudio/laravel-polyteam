@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Models\Teams\Traits;
+
+use App\Models\Teams\{{model}};
+use IBroStudio\Polyteam\Models\Traits\UserHasPolyteams;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Config;
+
+trait UserHas{{plural_model}}
+{
+    use UserHasPolyteams;
+
+    public function {{plural_lower_model}}(): BelongsToMany
+    {
+        return $this->belongsToMany({{model}}::class, Config::get('polyteam.tables.polyteam_user'), 'user_id', 'team_id')->withTimestamps();
+    }
+
+    public function current{{model}}(): BelongsTo
+    {
+        return $this->belongsTo({{model}}::class, 'current_{{lower_model}}_id', 'id');
+    }
+
+    public function owned{{plural_model}}(): mixed
+    {
+        return $this->{{plural_lower_model}}()->where('owner_id', '=', $this->getKey());
+    }
+
+    public static function bootUserHas{{plural_model}}(): void
+    {
+        static::deleting(
+            function (Model $user) {
+                if (!method_exists(Config::get('polyteam.models.user'), 'bootSoftDeletes')) {
+                    $user->{{plural_lower_model}}()->sync([]);
+                }
+            }
+        );
+    }
+
+    public function is{{model}}Owner(): bool
+    {
+        return $this->isOwner();
+    }
+
+    public function isOwnerOf{{model}}({{model}}|array ${{lower_model}}): bool
+    {
+        return $this->isOwnerOfPolyteam(${{lower_model}});
+    }
+
+    public function attach{{model}}({{model}}|array ${{lower_model}}, $pivotData = []): self
+    {
+        return $this->attachPolyteam(${{lower_model}}, $pivotData);
+    }
+
+    public function detach{{model}}({{model}}|array ${{lower_model}}): self
+    {
+        return $this->detachPolyteam(${{lower_model}});
+    }
+
+    public function attach{{plural_model}}(array ${{plural_lower_model}}): self
+    {
+        foreach (${{plural_lower_model}} as $team) {
+            $this->attach{{model}}($team);
+        }
+
+        return $this;
+    }
+
+    public function detach{{plural_model}}(array ${{plural_lower_model}}): self
+    {
+        foreach (${{plural_lower_model}} as ${{lower_model}}) {
+            $this->detach{{model}}(${{lower_model}});
+        }
+
+        return $this;
+    }
+
+    public function switch{{model}}({{model}}|array|int ${{lower_model}}): self
+    {
+        return $this->switchPolyteam(${{lower_model}});
+    }
+
+    public function createOwned{{model}}(array $data, bool $forceSwitchTeam = false): {{model}}
+    {
+        return $this->createOwnedPolyteam({{model}}::class, $data, $forceSwitchTeam);
+    }
+
+    protected function getCurrentPolyteamId(): int|null
+    {
+        return $this->current_{{lower_model}}_id;
+    }
+
+    protected function setCurrentPolyteamId(int|null $polyteam_id): void
+    {
+        $this->current_{{lower_model}}_id = $polyteam_id;
+    }
+
+    protected function polyteams(): BelongsToMany
+    {
+        return $this->{{plural_lower_model}}();
+    }
+}

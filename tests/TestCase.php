@@ -1,8 +1,8 @@
 <?php
 
-namespace IBroStudio\PolymorphicTeam\Tests;
+namespace IBroStudio\Polyteam\Tests;
 
-use IBroStudio\PolymorphicTeam\PolymorphicTeamServiceProvider;
+use IBroStudio\Polyteam\PolyteamServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 

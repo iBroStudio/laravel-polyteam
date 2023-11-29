@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Models\Teams;
+
+use IBroStudio\Polyteam\Models\PolyteamChild;
+
+class {{model}} extends PolyteamChild
+{
+
+}

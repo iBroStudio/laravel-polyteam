@@ -1,21 +1,21 @@
 <?php
 
-namespace IBroStudio\PolymorphicTeam;
+namespace IBroStudio\Polyteam;
 
-use IBroStudio\PolymorphicTeam\Commands\PolymorphicTeamCommand;
+use IBroStudio\Polyteam\Commands\PolyteamCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class PolymorphicTeamServiceProvider extends PackageServiceProvider
+class PolyteamServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
             ->name('polymorphic-team')
-            ->hasConfigFile(['polymorphic-team', 'teamwork'])
-            ->hasMigration('polymorphic_team_tables_setup')
-            ->hasCommand(PolymorphicTeamCommand::class)
+            ->hasConfigFile(['polyteam', 'teamwork'])
+            ->hasMigration('polyteam_tables_setup')
+            ->hasCommand(PolyteamCommand::class)
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     //->publishConfigFile()

@@ -1,6 +1,6 @@
 <?php
 
-namespace IBroStudio\PolymorphicTeam\Database\Factories;
+namespace IBroStudio\Polyteam\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
